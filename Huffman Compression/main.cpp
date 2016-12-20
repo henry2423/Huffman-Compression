@@ -128,6 +128,7 @@ public:
     long total_nodes;
     typedef struct HuffmanNode
     {
+        bool used;
         long weight;
         long left_child, right_chlid, parent;
     } *h_node;
@@ -136,23 +137,25 @@ public:
 
 };
 
-frequency_table HuffmanTree::choose_min_nodes(frequency_table frequencyTables, long i,long *min1_pos,long *min2_pos){
+frequency_table HuffmanTree::choose_min_nodes(frequency_table frequencyTables, long i, long *min1_pos,long *min2_pos){
     
     
     for(long index=0; index<total_nodes; index++)
     {
-        if(frequencyTables[0].weight == huffman[index].weight)
+        if(huffman[index].used == 0 && frequencyTables[0].weight == huffman[index].weight)
         {
             *min1_pos = index;
+            huffman[index].used = 1;
             break;
         }
     }
     
     for(long index=0; index<total_nodes; index++)
     {
-        if( index != *min1_pos && frequencyTables[1].weight == huffman[index].weight)
+        if(huffman[index].used == 0 && index != *min1_pos && frequencyTables[1].weight == huffman[index].weight)
         {
             *min2_pos = index;
+            huffman[index].used = 1;
             break;
         }
     }
@@ -162,8 +165,9 @@ frequency_table HuffmanTree::choose_min_nodes(frequency_table frequencyTables, l
     frequencyTable temp{'0', huffman[*min1_pos].weight + huffman[*min2_pos].weight};
     
     frequencyTables.push_back(temp);
-    
     sort(frequencyTables.begin(), frequencyTables.end(), frequency_comp);
+    
+
     
     return frequencyTables;
     
@@ -186,10 +190,12 @@ HuffmanTree::HuffmanTree(frequency_table frequencyTables, long N){
         huffman[i].left_child = -1;
         huffman[i].right_chlid = -1;
         huffman[i].parent = -1;
+        huffman[i].used = 0;
     }
     
+
     //形成樹
-    for(long i=accumlate_nodes ; i<total_nodes; i++)
+    for(long i=accumlate_nodes; i<total_nodes; i++)
     {
         long min1_pos;
         long min2_pos;
@@ -265,11 +271,11 @@ void encoded(frequency_table f_table, ifstream &input_file, ofstream &output_fil
     
     
     
-    char actual_nodes = char(h_tree.accumlate_nodes - 1);
+    char actual_nodes = static_cast<unsigned char>(h_tree.accumlate_nodes - 1);
     //char total_nodes = char(h_tree.total_nodes);
     
     output_file << actual_nodes;
-    //cout << actual_nodes << total_nodes << endl;
+    //cout << actual_nodes << endl;
     
     for(int index=0; index<h_tree.total_nodes; index++)
     {
@@ -301,7 +307,7 @@ void decoded(ifstream &input_file, ofstream &output_file)
     total_nodes = actual_nodes*2 - 1;
     
     HuffmanTree h_decode_tree(actual_nodes);
-    char decode_table[256];
+    char decode_table[actual_nodes];
     
     for(int index=0; index<total_nodes; index++)
     {
@@ -382,7 +388,7 @@ int main(int argc, const char * argv[]) {
         //compress
         if(command == 1)
         {
-            
+            /*
             cout << "Compress" << endl;
             cout << "Input filename: ";
             cin >> filename;
@@ -401,11 +407,11 @@ int main(int argc, const char * argv[]) {
                 cout<<"Can't create the file"<<endl;
                 continue;
             }
+            */
             
-            /*
             input_file.open(argv[1], ifstream::binary | ifstream::in);
             output_file.open(argv[2], ofstream::binary | ofstream::out | ofstream::trunc);
-            */
+            
             
             cout << "Compressing..." << endl;
             
@@ -430,7 +436,7 @@ int main(int argc, const char * argv[]) {
         //decompress
         else if(command == 2)
         {
-            
+            /*
             cout << "Extract" << endl;
             cout << "Input filename: ";
             cin >> filename;
@@ -449,12 +455,12 @@ int main(int argc, const char * argv[]) {
                 cout<<"Can't create the file"<<endl;
                 continue;
             }
+            */
             
             
-            /*
             input_file.open(argv[2], ifstream::binary | ifstream::in);
             output_file.open(argv[3], ofstream::binary | ofstream::out | ofstream::trunc);
-            */
+            
             
             cout << "Decompressing..." << endl;
             
@@ -476,6 +482,9 @@ int main(int argc, const char * argv[]) {
             
             printf("Cost %f ms \n", consume);
             
+        }else
+        {
+            cout << "Wrong Command, Please key in again." << endl;
         }
         
         
