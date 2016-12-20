@@ -388,7 +388,7 @@ int main(int argc, const char * argv[]) {
         //compress
         if(command == 1)
         {
-            /*
+            
             cout << "Compress" << endl;
             cout << "Input filename: ";
             cin >> filename;
@@ -407,11 +407,12 @@ int main(int argc, const char * argv[]) {
                 cout<<"Can't create the file"<<endl;
                 continue;
             }
-            */
             
+            
+            /*
             input_file.open(argv[1], ifstream::binary | ifstream::in);
             output_file.open(argv[2], ofstream::binary | ofstream::out | ofstream::trunc);
-            
+            */
             
             cout << "Compressing..." << endl;
             
@@ -436,7 +437,7 @@ int main(int argc, const char * argv[]) {
         //decompress
         else if(command == 2)
         {
-            /*
+            
             cout << "Extract" << endl;
             cout << "Input filename: ";
             cin >> filename;
@@ -455,12 +456,12 @@ int main(int argc, const char * argv[]) {
                 cout<<"Can't create the file"<<endl;
                 continue;
             }
-            */
             
             
+            /*
             input_file.open(argv[2], ifstream::binary | ifstream::in);
             output_file.open(argv[3], ofstream::binary | ofstream::out | ofstream::trunc);
-            
+            */
             
             cout << "Decompressing..." << endl;
             
