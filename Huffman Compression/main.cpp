@@ -395,7 +395,7 @@ int main(int argc, const char * argv[]) {
             input_file.open(filename, ifstream::binary | ifstream::in);
             if(!input_file)
             {
-                cout<<"Can't open the file"<<endl;
+                cout<<"Can't open the file" << endl << endl;
                 continue;
             }
 
@@ -404,7 +404,7 @@ int main(int argc, const char * argv[]) {
             output_file.open(filename, ofstream::binary | ofstream::out | ofstream::trunc);
             if(!output_file)
             {
-                cout<<"Can't create the file"<<endl;
+                cout<<"Can't create the file" << endl << endl;
                 continue;
             }
             
@@ -444,7 +444,7 @@ int main(int argc, const char * argv[]) {
             input_file.open(filename, ifstream::binary | ifstream::in);
             if(!input_file)
             {
-                cout<<"Can't open the file"<<endl;
+                cout<<"Can't open the file" << endl << endl;
                 continue;
             }
             
@@ -453,7 +453,7 @@ int main(int argc, const char * argv[]) {
             output_file.open(filename, ofstream::binary | ofstream::out | ofstream::trunc);
             if(!output_file)
             {
-                cout<<"Can't create the file"<<endl;
+                cout<<"Can't create the file" <<endl << endl;
                 continue;
             }
             
@@ -483,7 +483,64 @@ int main(int argc, const char * argv[]) {
             
             printf("Cost %f ms \n", consume);
             
-        }else
+        }
+        else if(command == 4)
+        {
+            
+            ifstream input_file2;      //fstream 讀入input_file
+            cout << "Comparing" << endl;
+            cout << "Input filename: ";
+            cin >> filename;
+            input_file.open(filename, ifstream::binary | ifstream::in);
+            if(!input_file)
+            {
+                cout<<"Can't open the file"<<endl;
+                continue;
+            }
+            
+            cout << "Compare filename: ";
+            cin >> filename;
+            input_file2.open(filename, ifstream::binary | ifstream::in);
+            if(!input_file2)
+            {
+                cout<<"Can't create the file"<<endl;
+                continue;
+            }
+            
+            unsigned char temp1;
+            unsigned char temp2;
+            
+            
+            
+            long count = 0;
+            bool dif = 0;
+           
+            while( input_file >> temp1 )
+            {
+                
+                count++;
+                input_file2 >> temp2;
+                
+                if( temp1 != temp2 )
+                {
+                    cout << "At:: "<< count << endl;
+                    cout << "diff:: " << temp1 << " " << temp2 << endl;
+                    dif = 1;
+                }
+                
+            }
+            
+            if(dif == 0)
+            {
+                cout << "It's a same file." << endl;
+            }
+            
+            
+            
+            
+            
+        }
+        else
         {
             cout << "Wrong Command, Please key in again." << endl;
         }
