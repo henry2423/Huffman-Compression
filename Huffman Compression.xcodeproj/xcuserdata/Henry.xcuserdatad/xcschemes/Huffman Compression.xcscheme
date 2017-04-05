@@ -63,15 +63,15 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/Henry/Downloads/Source/red.txt"
+            argument = "/Users/Henry/Downloads/1.flac"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/Henry/Downloads/10"
+            argument = "/Users/Henry/Downloads/1_1"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/Henry/Downloads/11"
+            argument = "/Users/Henry/Downloads/1_2.flac"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
